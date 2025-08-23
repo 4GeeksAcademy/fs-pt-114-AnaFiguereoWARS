@@ -17,7 +17,7 @@ export const Cards = ({ id, name, url, type }) => {
                 <img src={`https://raw.githubusercontent.com/tbone849/star-wars-guide/refs/heads/master/build/assets/img/${type}/${id}.jpg`} className="card-img-top" alt="..." />
                 <div className="card-body" style={{ padding: "15px" }} >
                     <h5 className="card-title"> {name} </h5>
-                    <Link to = "/learnmore">
+                    <Link to = {`/learnmore/${type}/${id}`}>
                         <button className="btn btn-primary">Go somewhere</button>
                     </Link>
                     <button className="btn btn-warning">
@@ -35,17 +35,3 @@ export const Cards = ({ id, name, url, type }) => {
         </div>
     )
 }
-
-
-// que es el use param 
-
-// const url = "https://www.swapi.tech/api"
-
-// const getCharacters = async () =>{
-//     const response = await fetch (url + "/people")
-//     if (!response.ok) {
-//         return ("Characters not found")
-//     }
-//     const data = await response.json()
-//     console.log(data)
-// }

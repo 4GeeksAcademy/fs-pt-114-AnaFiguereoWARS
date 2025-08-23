@@ -1,20 +1,62 @@
-
+import { useEffect, useState } from "react"
+import { useParams } from "react-router-dom"
 
 export const Description = () => {
+    const { type, id } = useParams();
+    const [description, setDescription] = useState(null);
+
+    useEffect(() => {
+        const url = "https://www.swapi.tech/api";
+        const details = async () => {
+            try {
+                const urlfinal = type === "characters" ? "people" : "planets";
+                const response = await fetch(`${url}/${urlfinal}/${id}`);
+                const data = await response.json();
+                console.log(data);
+                setDescription(data.result.properties);
+            } catch (error) {
+                console.log("Error fetching the API", error);
+            }
+        };
+        details();
+    }, [type, id]);
+
+    if (!description) {
+        return (
+            <div>
+                <div className="d-flex justify-content-center">
+                <img src="https://media.tenor.com/Ei4PL-xdHwQAAAAM/baby-yoda-grogu.gif" />
+            </div>
+             <p className="d-flex justify-content-center">Loading...</p>
+            </div>
+        )
+
+    }
+
+
     return (
-        <div className="card mb-3" style={{maxwidth:"540px"}}>
-                <div className="row g-0">
-                    <div className="col-md-4">
-                        <img src="..." className="img-fluid rounded-start" alt="..."/>
-                    </div>
-                    <div className="col-md-8">
-                        <div className="card-body">
-                            <h5 className="card-title">Card title</h5>
-                            <p className="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                            <p className="card-text"><small className="text-body-secondary">Last updated 3 mins ago</small></p>
+        <div className="card mb-3" style={{ maxwidth: "540px" }}>
+            <div className="row g-0">
+                <div className="col-md-4" style={{ width: "19rem" }}>
+                    <img src={`https://raw.githubusercontent.com/tbone849/star-wars-guide/refs/heads/master/build/assets/img/${type}/${id}.jpg`} className="card-img-top" alt="..." />
+                </div>
+                <div className="col-md-8">
+                    <div className="card-body">
+                        <h5 className="card-title">{description.name}</h5>
+                        <div>
+                            <p className="card-text">{description.created}</p>
+                            <p className="card-text">{description.edited}</p>
+                            <p className="card-text">{description.gender}</p>
+                            <p className="card-text">{description.skin_color}</p>
+                            <p className="card-text">{description.hair_color}</p>
+                            <p className="card-text">{description.height}</p>
+                            <p className="card-text">{description.eye_color}</p>
+                            <p className="card-text">{description.mass}</p>
+                            <p className="card-text">{description.birth_year}</p>
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
     )
 }
