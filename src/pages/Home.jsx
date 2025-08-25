@@ -44,7 +44,7 @@ export const Home = () => {
 				<div className="d-flex justify-content-center ">
 					<div className="d-flex w-75 overflow-auto">
 						{store.characters.map((character) => (
-							<Cards name={character.name} id={character.uid} url={character.url} type={"characters"} />
+							<Cards key={character.uid}  name={character.name} id={character.uid} url={character.url} type={"characters"} />
 						))}
 					</div>
 				</div>
@@ -53,7 +53,7 @@ export const Home = () => {
 				<div className="d-flex justify-content-center">
 					<div className="d-flex w-75 overflow-auto">
 						{store.planets.map((planet) => (
-							<Cards name={planet.name} id={planet.uid} url={planet.url} type={"planets"} />
+							<Cards key={planet.uid} name={planet.name} id={planet.uid} url={planet.url} type={"planets"} />
 						))}
 					</div>
 				</div>

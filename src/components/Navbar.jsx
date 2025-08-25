@@ -1,7 +1,9 @@
 import { Link } from "react-router-dom";
+import useGlobalReducer from "../hooks/useGlobalReducer";
 
+// para obtener información de store, debemos importar su funcion useglobal reducer y el nombre store ahí abajo que se encuentra en hook
 export const Navbar = () => {
-
+	const {store} = useGlobalReducer()
 	return (
 		<nav className="navbar navbar-light bg-light">
 			<div className="container">
@@ -10,16 +12,31 @@ export const Navbar = () => {
 				</Link>
 				<div className="ml-auto">
 					<Link to="/demo">
-						<button type="button" class="btn btn-primary position-relative">
-							Favorites
-							<span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-								99+
-								<span class="visually-hidden">unread messages</span>
-							</span>
-						</button>
+						<div className="btn-group">
+							<button
+								type="button"
+								className="btn btn-primary dropdown-toggle"
+								data-bs-toggle="dropdown"
+								aria-expanded="false">Favorites
+								<span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+									
+								<span className="visually-hidden">favorites</span>
+								</span>
+							</button>
+							<ul className="dropdown-menu">
+								{store.favs.map((fav, index) => (
+									<li key={index} >
+										{console.log(fav)}
+										{fav}
+									</li>
+
+								))}
+							</ul>
+						</div>
+
 					</Link>
 				</div>
 			</div>
-		</nav>
+		</nav >
 	);
 };

@@ -2,9 +2,12 @@
 export const initialStore=()=>{
   return{
     characters:[],
-    planets:[]
+    planets:[],
+    favs:[]
   }
 }
+
+
 
 export default function storeReducer(store, action = {}) {
   switch(action.type){
@@ -15,6 +18,13 @@ export default function storeReducer(store, action = {}) {
     case "addPlanets":
       return{
         ...store, planets:action.payload
+      }
+    case "addFavs":
+      if (store.favs.find(item => item.name === action.payload.name)) {
+        return store
+      }
+      return{
+        ...store, favs:[...store.favs,action.payload]
       }
     default:
       throw Error('Unknown action.');

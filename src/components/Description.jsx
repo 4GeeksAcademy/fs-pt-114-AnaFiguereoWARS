@@ -37,7 +37,7 @@ export const Description = () => {
     return (
         <div className="card mb-3" style={{ maxwidth: "540px" }}>
             <div className="row g-0">
-                <div className="col-md-4" style={{ width: "19rem" }}>
+                <div className="col-md-4" style={{ width: "23rem" }}>
                     <img src={`https://raw.githubusercontent.com/tbone849/star-wars-guide/refs/heads/master/build/assets/img/${type}/${id}.jpg`} className="card-img-top" alt="..." />
                 </div>
                 <div className="col-md-8">
@@ -53,6 +53,16 @@ export const Description = () => {
                             <p className="card-text">{description.eye_color}</p>
                             <p className="card-text">{description.mass}</p>
                             <p className="card-text">{description.birth_year}</p>
+                            <p className="card-text">{description.climate} </p>
+                            <p className="card-text">{description.surface_water} </p>
+                            <p className="card-text">{description.name} </p>
+                            <p className="card-text">{description.diameter} </p>
+                            <p className="card-text">{description.rotation_period} </p>
+                            <p className="card-text">{description.terrain} </p>
+                            <p className="card-text">{description.gravity} </p>
+                            <p className="card-text">{description.orbital_period} </p>
+                            <p className="card-text">{description.population} </p>
+
                         </div>
                     </div>
                 </div>
