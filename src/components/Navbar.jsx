@@ -4,9 +4,9 @@ import useGlobalReducer from "../hooks/useGlobalReducer";
 // para obtener información de store, debemos importar su funcion useglobal reducer y el nombre store ahí abajo que se encuentra en hook
 export const Navbar = () => {
 	const { dispatch, store } = useGlobalReducer()
-	const handleeliminatefavs = (fav) => {
+	const handleeliminatefavs = (favName) => {
 		dispatch({
-			"type": "eliminateFav", payload:fav.name
+			"type": "eliminateFav", payload: favName
 		})
 	};
 	return (
@@ -16,7 +16,6 @@ export const Navbar = () => {
 					<img style={{ width: "80px", height: "80px" }} src="https://img.icons8.com/ios7/600/star-wars.png" />
 				</Link>
 				<div className="ml-auto">
-					<Link to="/demo">
 						<div className="btn-group">
 							<button
 								type="button"
@@ -32,15 +31,13 @@ export const Navbar = () => {
 								{store.favs.map((fav, index) => (
 									<li key={index} >
 										{fav.name}
-										<button onClick={handleeliminatefavs(fav)}>
+										<button onClick={() => handleeliminatefavs(fav)}>
 											x
 										</button>
 									</li>
 								))}
 							</ul>
 						</div>
-
-					</Link>
 				</div>
 			</div>
 		</nav >
