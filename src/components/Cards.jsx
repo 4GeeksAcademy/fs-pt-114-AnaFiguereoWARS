@@ -4,18 +4,20 @@ import useGlobalReducer from "../hooks/useGlobalReducer";
 
 // Habiendo obtenido los personajes, debe haber la misma cantidad de cards segun los personajes (iran por id)
 
-export const Cards = ({ id, name, url, type }) => {
-    const {store, dispatch}= useGlobalReducer()
+export const Cards = ({ id, name, character, type, planet }) => {
+    const {dispatch}= useGlobalReducer()
     
     const [icon, setIcon] = useState(true)
 
     const handleClick = () => {
         setIcon(!icon)
     }
-    const handleFavs = (name) => {
-        dispatch ({
-            "type": "addFavs", payload: name
-        })
+    const handleFavs = () => {
+        const item = type === "characters" ? character : planet;
+        dispatch({
+            "type": "addFavs",
+            payload: { ...item, itemType: type }
+        });
     }
 
     return (
@@ -34,7 +36,7 @@ export const Cards = ({ id, name, url, type }) => {
                                 className={icon ? "fa-solid fa-heart-crack" : "fa-solid fa-heart"}
                                 onClick={() => {
                                     handleClick();
-                                    handleFavs(name);
+                                    handleFavs();
                                 }}
                             >
                             </i>

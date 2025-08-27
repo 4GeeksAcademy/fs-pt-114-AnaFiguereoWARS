@@ -33,7 +33,6 @@ export const Description = () => {
 
     }
 
-
     return (
         <div className="card mb-3" style={{ maxwidth: "540px" }}>
             <div className="row g-0">
@@ -44,6 +43,7 @@ export const Description = () => {
                     <div className="card-body">
                         <h5 className="card-title">{description.name}</h5>
                         <div>
+                            {/* Esto no es muy bonito, pero en sí, esta api tampoco, lo siento Javi :( */}
                             <p className="card-text">{description.created}</p>
                             <p className="card-text">{description.edited}</p>
                             <p className="card-text">{description.gender}</p>

@@ -23,8 +23,13 @@ export default function storeReducer(store, action = {}) {
       if (store.favs.find(item => item.name === action.payload.name)) {
         return store
       }
-      return{
-        ...store, favs:[...store.favs,action.payload]
+      return {
+        ...store, favs: [...store.favs, action.payload]
+      }
+    case "eliminateFav":
+      return {
+        ...store,
+        favs: store.favs.filter(item => item.name !== action.payload.name)
       }
     default:
       throw Error('Unknown action.');

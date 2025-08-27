@@ -3,7 +3,12 @@ import useGlobalReducer from "../hooks/useGlobalReducer";
 
 // para obtener información de store, debemos importar su funcion useglobal reducer y el nombre store ahí abajo que se encuentra en hook
 export const Navbar = () => {
-	const {store} = useGlobalReducer()
+	const { dispatch, store } = useGlobalReducer()
+	const handleeliminatefavs = (fav) => {
+		dispatch({
+			"type": "eliminateFav", payload:fav.name
+		})
+	};
 	return (
 		<nav className="navbar navbar-light bg-light">
 			<div className="container">
@@ -19,17 +24,18 @@ export const Navbar = () => {
 								data-bs-toggle="dropdown"
 								aria-expanded="false">Favorites
 								<span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-									
-								<span className="visually-hidden">favorites</span>
+
+									<span className="visually-hidden">favorites</span>
 								</span>
 							</button>
 							<ul className="dropdown-menu">
 								{store.favs.map((fav, index) => (
 									<li key={index} >
-										{console.log(fav)}
-										{fav}
+										{fav.name}
+										<button onClick={handleeliminatefavs(fav)}>
+											x
+										</button>
 									</li>
-
 								))}
 							</ul>
 						</div>

@@ -44,16 +44,16 @@ export const Home = () => {
 				<div className="d-flex justify-content-center ">
 					<div className="d-flex w-75 overflow-auto">
 						{store.characters.map((character) => (
-							<Cards key={character.uid}  name={character.name} id={character.uid} url={character.url} type={"characters"} />
+							<Cards key={character.uid} character={character} name={character.name} id={character.uid} url={character.url} type={"characters"} />
 						))}
 					</div>
 				</div>
 
-				<h1 style={{ color: "red", margin: "15px", paddingLeft: "15px" }} >Planets</h1>
+				<h1 style={{ color: "red", margin: "15px", paddingLeft: "15px" }}>Planets</h1>
 				<div className="d-flex justify-content-center">
 					<div className="d-flex w-75 overflow-auto">
 						{store.planets.map((planet) => (
-							<Cards key={planet.uid} name={planet.name} id={planet.uid} url={planet.url} type={"planets"} />
+							<Cards key={planet.uid} planet={planet} name={planet.name} id={planet.uid} url={planet.url} type={"planets"} />
 						))}
 					</div>
 				</div>
