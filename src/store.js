@@ -29,6 +29,7 @@ export default function storeReducer(store, action = {}) {
     case "eliminateFav":
       return {
         ...store,
+        //                                  acciona la carga (de datos) de name
         favs: store.favs.filter(item => item.name !== action.payload.name)
       }
     default:

@@ -5,29 +5,24 @@ import useGlobalReducer from "../hooks/useGlobalReducer";
 // Habiendo obtenido los personajes, debe haber la misma cantidad de cards segun los personajes (iran por id)
 
 export const Cards = ({ id, name, character, type, planet }) => {
+    // store variables, dispatch funciones
     const {store, dispatch}= useGlobalReducer()
-    
-    // const [icon, setIcon] = useState(true)
-    const icon = store.favs.some(fav => fav.id === id)
-   
-    const handleClick = () => {
-        if (icon) {
-            dispatch({
-                "type": "eliminateFav",payload:{"name":name}})
-        } else {
-            dispatch ({
-                "type": "addFavs", payload: {"name":name}
-            })
-        }
-        }
-    
-    
-    const handleFavs = () => {
+    //Voy a coger "algo" de favs del store (en este caso)   ve por cada índice y coge lo que coincida
+    const isInFavorites = store.favs.some(fav => fav.name === name)
+
+    const handleTogglefav = () => {
+
         const item = type === "characters" ? character : planet;
-        dispatch({
-            "type": "addFavs",
-            payload: { ...item, itemType: type }
-        });
+        
+        if (isInFavorites) {
+            //                             estamos usando una clave y le estamos dando un valor
+            dispatch({type: "eliminateFav", payload:{name:name}})
+        }else {
+            dispatch({type: "addFavs", payload:{...item, itemType:type, id:id}})
+        }
+
+
+
     }
 
     return (
@@ -40,15 +35,10 @@ export const Cards = ({ id, name, character, type, planet }) => {
                         <Link to={`/learnmore/${type}/${id}`}>
                             <button className="btn btn-primary">Go somewhere</button>
                         </Link>
-                        <button className="btn btn-warning">
+                        <button className="btn btn-warning"
+                        onClick={handleTogglefav}>
                             <i
-                                id="icon"
-                                className={icon ? "fa-solid fa-heart-crack" : "fa-solid fa-heart"}
-                                onClick={() => {
-                                    handleClick();
-                                    handleFavs();
-                                }}
-                            >
+                                className={isInFavorites ? "fa-solid fa-heart" : "fa-solid fa-heart-crack"}>
                             </i>
                         </button>
 
