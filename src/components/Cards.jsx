@@ -5,12 +5,25 @@ import useGlobalReducer from "../hooks/useGlobalReducer";
 // Habiendo obtenido los personajes, debe haber la misma cantidad de cards segun los personajes (iran por id)
 
 export const Cards = ({ id, name, character, type, planet }) => {
+    
+    function guardarDatos() {
+    // Guardar un valor simple
+    sessionStorage.setItem('miDato', store.favs);
+    
+    // Guardar un objeto (necesita ser convertido a JSON)
+    const objeto = { nombre: 'Juan', edad: 25 };
+    sessionStorage.setItem('miObjeto', JSON.stringify(objeto));
+    
+    console.log('Datos guardados en sessionStorage');
+
+
     // store variables, dispatch funciones
     const {store, dispatch}= useGlobalReducer()
     //Voy a coger "algo" de favs del store (en este caso)   ve por cada índice y coge lo que coincida
     const isInFavorites = store.favs.some(fav => fav.name === name)
 
     const handleTogglefav = () => {
+         sessionStorage.setItem();
 
         const item = type === "characters" ? character : planet;
         
@@ -35,7 +48,7 @@ export const Cards = ({ id, name, character, type, planet }) => {
                         <Link to={`/learnmore/${type}/${id}`}>
                             <button className="btn btn-primary">Go somewhere</button>
                         </Link>
-                        <button className="btn btn-warning"
+                        <button id="likes" className="btn btn-warning"
                         onClick={handleTogglefav}>
                             <i
                                 className={isInFavorites ? "fa-solid fa-heart" : "fa-solid fa-heart-crack"}>

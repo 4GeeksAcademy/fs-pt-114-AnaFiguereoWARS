@@ -21,18 +21,24 @@ export const Navbar = () => {
 							type="button"
 							className="btn btn-primary dropdown-toggle"
 							data-bs-toggle="dropdown"
-							aria-expanded="false">Favorites
+							aria-expanded="false"
+							data-bs-auto-close="false">Favorites
 							<span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-								<span className="visually-hidden">favorites</span>
+								<span>{store.favs.length}</span>
 							</span>
 						</button>
 						<ul className="dropdown-menu">
 							{store.favs.map((fav, index) => (
 								<li key={index} >
-									<Link to={`/learnmore/${fav.itemType}/${fav.id}`}>
-										{fav.name}
-									</Link>
-									<button onClick={() => handleeliminatefavs(fav)}>x</button>
+									<div className="d-flex justify-content-between" style={{ padding: "5px" }}>
+										<Link
+											to={`/learnmore/${fav.itemType}/${fav.id}`}
+											style={{ textDecoration: "none", color: "black" }}>
+											{fav.name}
+										</Link>
+										<button
+										onClick={() => handleeliminatefavs(fav)} >x</button>
+									</div>
 								</li>
 							))}
 						</ul>
