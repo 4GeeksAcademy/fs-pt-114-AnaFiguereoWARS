@@ -1,13 +1,14 @@
 //           informacion inicial de los personajes y planetas de la api
 export const initialStore=()=>{
+  // el session storage es una memoria que guarda informacion
+  const savedFavs = sessionStorage.getItem("likes")
+
   return{
     characters:[],
     planets:[],
-    favs:[]
+    favs: savedFavs ? JSON.parse(savedFavs): []
   }
 }
-
-
 
 export default function storeReducer(store, action = {}) {
   switch(action.type){
@@ -19,19 +20,24 @@ export default function storeReducer(store, action = {}) {
       return{
         ...store, planets:action.payload
       }
+
     case "addFavs":
       if (store.favs.find(item => item.name === action.payload.name)) {
         return store
       }
-      return {
-        ...store, favs: [...store.favs, action.payload]
+      state = {
+        ...store, 
+        favs: [...store.favs, action.payload]
       }
+      sessionStorage.setItem("likes", JSON.stringify(state.favs))
+      return state
     case "eliminateFav":
-      return {
+      state = {
         ...store,
-        //                                  acciona la carga (de datos) de name
         favs: store.favs.filter(item => item.name !== action.payload.name)
       }
+      sessionStorage.setItem("likes", JSON.stringify(state.favs))
+      return state
     default:
       throw Error('Unknown action.');
   }    
