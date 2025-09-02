@@ -25,19 +25,19 @@ export default function storeReducer(store, action = {}) {
       if (store.favs.find(item => item.name === action.payload.name)) {
         return store
       }
-      state = {
+      const stateAdd = {
         ...store, 
         favs: [...store.favs, action.payload]
       }
-      sessionStorage.setItem("likes", JSON.stringify(state.favs))
-      return state
+      sessionStorage.setItem("likes", JSON.stringify(stateAdd.favs))
+      return stateAdd
     case "eliminateFav":
-      state = {
+      const stateRemove = {
         ...store,
         favs: store.favs.filter(item => item.name !== action.payload.name)
       }
-      sessionStorage.setItem("likes", JSON.stringify(state.favs))
-      return state
+      sessionStorage.setItem("likes", JSON.stringify(stateRemove.favs))
+      return stateRemove
     default:
       throw Error('Unknown action.');
   }    

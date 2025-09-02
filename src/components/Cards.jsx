@@ -14,6 +14,10 @@ export const Cards = ({ id, name, character, type, planet }) => {
     const handleTogglefav = () => {
     
         const item = type === "characters" ? character : planet;
+          if (type === "planets" && id === 1) {
+            payload.results.url = `https://static.wikia.nocookie.net/esstarwars/images/b/b0/Tatooine_TPM.png/revision/latest?cb=20131214162357`
+
+          }
         
         if (isInFavorites) {
             //                             estamos usando una clave y le estamos dando un valor
@@ -26,12 +30,14 @@ export const Cards = ({ id, name, character, type, planet }) => {
     return (
         <div className="mx-4" >
             <div className="card" style={{ width: "18rem" }}>
-                <img src={`https://raw.githubusercontent.com/tbone849/star-wars-guide/refs/heads/master/build/assets/img/${type}/${id}.jpg`} className="card-img-top" alt="..." />
+                <img 
+                    src={`https://raw.githubusercontent.com/tbone849/star-wars-guide/refs/heads/master/build/assets/img/${type}/${id}.jpg`}
+                    className="card-img-top" alt="..." />
                 <div className="card-body" style={{ padding: "15px" }} >
                     <h5 className="card-title"> {name} </h5>
                     <div className="d-flex justify-content-between"style = {{marginTop: "15px"}}  >
                         <Link to={`/learnmore/${type}/${id}`}>
-                            <button className="btn btn-primary">Go somewhere</button>
+                            <button className="btn btn-primary">Learn more!</button>
                         </Link>
                         <button className="btn btn-warning"
                         onClick={handleTogglefav}>
